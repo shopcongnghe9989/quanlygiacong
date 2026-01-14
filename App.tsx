@@ -4,7 +4,7 @@ import {
   LayoutDashboard, 
   Package, 
   ClipboardList, 
-  BarChart3, 
+  BarChart, 
   Users, 
   Wallet,
   Menu,
@@ -25,25 +25,37 @@ const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('products');
-    return saved ? JSON.parse(saved) : [
-      { id: 'p1', name: 'Gấu bông Teddy 30cm', unitPrice: 12000, category: 'Đồ chơi vải', createdAt: Date.now() },
-      { id: 'p2', name: 'Bộ xếp hình gỗ 20 khối', unitPrice: 25000, category: 'Đồ chơi gỗ', createdAt: Date.now() },
-      { id: 'p3', name: 'Ô tô nhựa mini', unitPrice: 8000, category: 'Đồ chơi nhựa', createdAt: Date.now() }
-    ];
+    try {
+      const saved = localStorage.getItem('products');
+      return saved ? JSON.parse(saved) : [
+        { id: 'p1', name: 'Gấu bông Teddy 30cm', unitPrice: 12000, category: 'Đồ chơi vải', createdAt: Date.now() },
+        { id: 'p2', name: 'Bộ xếp hình gỗ 20 khối', unitPrice: 25000, category: 'Đồ chơi gỗ', createdAt: Date.now() },
+        { id: 'p3', name: 'Ô tô nhựa mini', unitPrice: 8000, category: 'Đồ chơi nhựa', createdAt: Date.now() }
+      ];
+    } catch (e) {
+      return [];
+    }
   });
 
   const [employees, setEmployees] = useState<Employee[]>(() => {
-    const saved = localStorage.getItem('employees');
-    return saved ? JSON.parse(saved) : [
-      { id: 'e1', name: 'Nguyễn Văn A', role: 'Thợ may nhồi bông' },
-      { id: 'e2', name: 'Trần Thị B', role: 'Thợ hoàn thiện gỗ' }
-    ];
+    try {
+      const saved = localStorage.getItem('employees');
+      return saved ? JSON.parse(saved) : [
+        { id: 'e1', name: 'Nguyễn Văn A', role: 'Thợ may nhồi bông' },
+        { id: 'e2', name: 'Trần Thị B', role: 'Thợ hoàn thiện gỗ' }
+      ];
+    } catch (e) {
+      return [];
+    }
   });
 
   const [logs, setLogs] = useState<ProductionLog[]>(() => {
-    const saved = localStorage.getItem('logs');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('logs');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -59,7 +71,7 @@ const App: React.FC = () => {
     { id: 'products', label: 'Danh mục đồ chơi', icon: Package },
     { id: 'employees', label: 'Quản lý nhân sự', icon: Users },
     { id: 'salary', label: 'Tính lương sản phẩm', icon: Wallet },
-    { id: 'reports', label: 'Báo cáo ngày', icon: BarChart3 },
+    { id: 'reports', label: 'Báo cáo ngày', icon: BarChart },
   ];
 
   return (
@@ -82,7 +94,7 @@ const App: React.FC = () => {
               }`}
             >
               <item.icon size={20} />
-              {isSidebarOpen && <span className="font-medium">{item.label}</span>}
+              {isSidebarOpen && <span className="font-medium text-sm">{item.label}</span>}
             </button>
           ))}
         </nav>
