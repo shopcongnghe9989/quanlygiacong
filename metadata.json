@@ -1,0 +1,5 @@
+{
+  "name": "ProTrack - Quản lý Sản xuất Gia công",
+  "description": "Một ứng dụng hiện đại để quản lý hàng hóa gia công, theo dõi sản lượng nhân viên, tính toán giá thành và báo cáo tổng kết thông minh sử dụng Gemini AI.",
+  "requestFramePermissions": []
+}
